@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\StudentGrade;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -25,11 +26,17 @@ class StudentController extends Controller
         //return Student::orderBy('city', 'desc')->get();
         //return Student::limit(7)->get();
 
+        //return Student::with('grade')->get();
+
         //return Student::whereIn('id', [1,3,5,7,9,11])->get();
         //return Student::whereNotIn('id', [1,3,5,7,9,11])->get();
 
         //return Student::where('province', 'Maryland')->first();
+        //return Student::with('grades')->get();
 
+        return Student::with(['grades' => function($query){
+            return $query->where('grade', '>=', 90);
+        }])->get();
         
     }
 

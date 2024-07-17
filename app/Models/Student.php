@@ -23,8 +23,13 @@ class Student extends Model
     ];
 
     protected $appends = ['fullname'];
-    public function getFullnameAttributes()
+    public function getFullnameAttribute()
     {
         return $this->fname . ' ' . $this->lname;
+    }
+
+    public function grades()
+    {
+        return $this->hasMany(SubjectGrade::class, 'student_id');
     }
 }
